@@ -3,11 +3,11 @@
   'use strict';
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches;
   var C = {
-    lake: 'Lake: your shared goal as a lake. Tap +$25, +$100 or +$250 to drop money in and watch the water rise. Switch between Kyoto, Home and Baby at the top.',
-    goals: 'Goals: every dream you are saving for, each with its own progress. Tap a goal to open its lake.',
-    together: 'Together: what each of you has added this month, plus love notes. Tap a note to send it to your partner.',
-    bills: 'Bills: your regular payments in one calm list. Flip a switch to turn autopay on or off.',
-    insights: 'Insights: the date you will reach your goal at your current pace, and your last six months of saving.'
+    lake: 'Lake: Your Shared Goal As A Lake. Tap +$25, +$100 Or +$250 To Drop Money In And Watch The Water Rise. Switch Between Kyoto, Home And Baby At The Top.',
+    goals: 'Goals: Every Dream You Are Saving For, Each With Its Own Progress. Tap A Goal To Open Its Lake.',
+    together: 'Together: What Each Of You Has Added This Month, Plus Love Notes. Tap A Chip To Send A Note To Your Partner.',
+    bills: 'Bills: Your Regular Payments In One Calm List. Flip A Switch To Turn Autopay On Or Off.',
+    insights: 'Insights: The Date You Will Reach Your Goal At Your Current Pace, And Your Last Six Months Of Saving.'
   };
   var cp = document.getElementById('cap');
   window.onLakeGo = function (v) { cp.textContent = C[v]; };
@@ -47,12 +47,12 @@
   if (!P) return;
 
   var G = {
-    japan: { n: 'Kyoto', f: 'Kyoto in spring', t: 6000, s: 3720, m: 520, i: 'plane' },
-    home: { n: 'Home', f: 'Our first home', t: 40000, s: 9800, m: 900, i: 'home' },
-    baby: { n: 'Baby', f: 'Welcoming baby', t: 8000, s: 7650, m: 300, i: 'smile' }
+    japan: { n: 'Kyoto', f: 'Kyoto In Spring', t: 6000, s: 3720, m: 520, i: 'plane' },
+    home: { n: 'Home', f: 'Our First Home', t: 40000, s: 9800, m: 900, i: 'home' },
+    baby: { n: 'Baby', f: 'Welcoming Baby', t: 8000, s: 7650, m: 300, i: 'smile' }
   };
   var k = 'japan', who = 'You', tot = { You: 420, Maya: 380 },
-      notes = [['Maya', 'for the ramen night'], ['You', 'proud of us']],
+      notes = [['Maya', 'For The Ramen Night'], ['You', 'Proud Of Us']],
       bills = [['Rent', 'home', '1st', 1], ['Internet', 'wave', '7th', 1], ['Insurance', 'shield', '15th', 0]];
 
   function $(i) { return P.querySelector('#' + i); }
@@ -74,10 +74,10 @@
     var g = G[k], p = pc(g);
     $('pT').textContent = g.f;
     $('pP').textContent = p + '%';
-    $('pA').textContent = fm(Math.min(g.s, g.t)) + ' of ' + fm(g.t);
-    $('pM').textContent = p >= 100 ? 'Your lake is full. Time to go.'
-      : p >= 80 ? 'Almost there. No rush.'
-      : p >= 40 ? 'The water is rising.' : 'A quiet start. Every drop counts.';
+    $('pA').textContent = fm(Math.min(g.s, g.t)) + ' Of ' + fm(g.t);
+    $('pM').textContent = p >= 100 ? 'Your Lake Is Full. Time To Go.'
+      : p >= 80 ? 'Almost There. No Rush.'
+      : p >= 40 ? 'The Water Is Rising.' : 'A Quiet Start. Every Drop Counts.';
     $('pW').style.transform = 'translateY(' + ((100 - p) * .82) + '%)';
     ea('#pSeg button', function (b) { b.setAttribute('aria-pressed', b.dataset.k === k); });
     $('pG').innerHTML = Object.keys(G).map(function (x) {
@@ -95,7 +95,7 @@
     }).join('');
     var mo = Math.max(1, Math.ceil((g.t - g.s) / g.m)), d = new Date();
     d.setMonth(d.getMonth() + mo);
-    $('pDs').textContent = 'At this pace, ' + g.n + ' is';
+    $('pDs').textContent = 'At This Pace, ' + g.n + ' Is';
     $('pD').textContent = p >= 100 ? 'Today'
       : d.toLocaleString('en-US', { month: 'long', year: 'numeric' });
   }
@@ -105,7 +105,7 @@
       return '<div class="gl bl"><span class="gi">' + ic(b[1]) + '</span><span>' + b[0] +
         '<br><small>' + b[2] + ' · ' + (b[3] ? 'Auto' : 'Manual') + '</small></span>' +
         '<button class="sw" data-i="' + i + '" aria-pressed="' + (b[3] ? 'true' : 'false') +
-        '" aria-label="Autopay for ' + b[0] + '"></button></div>';
+        '" aria-label="Autopay For ' + b[0] + '"></button></div>';
     }).join('');
     ea('.sw', function (s) {
       s.onclick = function () { bills[s.dataset.i][3] ^= 1; RB(); };
@@ -137,20 +137,20 @@
       tot[who] += a;
       var li = document.createElement('li');
       li.className = 'gl';
-      li.innerHTML = '<span>' + who + ' added $' + a + '</span><span style="opacity:.55">just now</span>';
+      li.innerHTML = '<span>' + who + ' Added $' + a + '</span><span style="opacity:.55">Just Now</span>';
       $('pL').prepend(li);
       while ($('pL').children.length > 2) $('pL').lastChild.remove();
       R();
     };
     $('pAdd').appendChild(b);
   });
-  ['♥ love', 'Proud of us', 'Almost there'].forEach(function (t) {
+  ['♥ Love', 'Proud Of Us', 'Almost There'].forEach(function (t) {
     var b = document.createElement('button');
     b.textContent = t;
     b.onclick = function () { notes.unshift([who, t.replace('♥ ', '')]); R(); };
     $('pC').appendChild(b);
   });
-  [['lake', 'drop', 'Lake'], ['goals', 'target', 'Goals'], ['together', 'heart', 'Us'],
+  [['lake', 'drop', 'Lake'], ['goals', 'target', 'Goals'], ['together', 'heart', 'Together'],
    ['bills', 'receipt', 'Bills'], ['insights', 'chart', 'Insights']].forEach(function (t) {
     var b = document.createElement('button');
     b.dataset.v = t[0];
@@ -202,7 +202,7 @@
         if (!r.ok) throw new Error('request failed');
         return r.json();
       }).then(function () {
-        thx.textContent = 'Thank you. We’ll write to you softly.';
+        thx.textContent = 'Thank You. We’ll Write To You Softly.';
         f.reset();
       }).catch(function () {
         thx.textContent = 'Something went quiet. Please try again.';
