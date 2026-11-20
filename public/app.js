@@ -3,11 +3,11 @@
   'use strict';
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches;
   var C = {
-    lake: 'Lake: Your Shared Goal As A Lake. Tap +$25, +$100 Or +$250 To Drop Money In And Watch The Water Rise. Switch Between Kyoto, Home And Baby At The Top.',
-    goals: 'Goals: Every Dream You Are Saving For, Each With Its Own Progress. Tap A Goal To Open Its Lake.',
-    together: 'Together: What Each Of You Has Added This Month, Plus Love Notes. Tap A Chip To Send A Note To Your Partner.',
-    bills: 'Bills: Your Regular Payments In One Calm List. Flip A Switch To Turn Autopay On Or Off.',
-    insights: 'Insights: The Date You Will Reach Your Goal At Your Current Pace, And Your Last Six Months Of Saving.'
+    lake: 'Your shared space for the everyday and the important, kept together in one calm place. Every small addition raises the water a little, making progress visible without turning it into a test. There is no score to keep and no one to answer to, just two people quietly building something.',
+    goals: 'Dreams feel closer when they have a name and a shoreline of their own. Set one for a holiday, a home or a new chapter, then let small, regular contributions gather into something real. Each goal keeps its own pace, so you can move toward it together without rushing the life you are living.',
+    together: 'Sharing a life is mostly the small things: the notes, the nods and the quiet check-ins. Keep them in one gentle place where you can both see what the other has added and leave a few warm words of your own. It keeps you connected and organised without turning togetherness into another task.',
+    bills: 'Rent, internet and insurance have a home here, with auto pay quietly taking care of the rest. Each bill sits in one clear list that you both can trust, with a simple switch whenever you would rather handle it yourselves. Less to remember, less to discuss, and more room for the parts of the day you actually enjoy.',
+    insights: 'Shared habits have a shape, and Lake helps you see it without judging a single one. It shows where your money is going and when a dream might arrive at the pace you are actually keeping. The result is a gentle sense of how you live together, clear enough to guide you and soft enough to leave you be.'
   };
   var cp = document.getElementById('cap');
   window.onLakeGo = function (v) { cp.textContent = C[v]; };
@@ -52,7 +52,7 @@
     baby: { n: 'Baby', f: 'Welcoming Baby', t: 8000, s: 7650, m: 300, i: 'smile' }
   };
   var k = 'japan', who = 'You', tot = { You: 420, Maya: 380 },
-      notes = [['Maya', 'For The Ramen Night'], ['You', 'Proud Of Us']],
+      notes = [['Maya', 'for the ramen night'], ['You', 'proud of us']],
       bills = [['Rent', 'home', '1st', 1], ['Internet', 'wave', '7th', 1], ['Insurance', 'shield', '15th', 0]];
 
   function $(i) { return P.querySelector('#' + i); }
@@ -74,10 +74,10 @@
     var g = G[k], p = pc(g);
     $('pT').textContent = g.f;
     $('pP').textContent = p + '%';
-    $('pA').textContent = fm(Math.min(g.s, g.t)) + ' Of ' + fm(g.t);
-    $('pM').textContent = p >= 100 ? 'Your Lake Is Full. Time To Go.'
-      : p >= 80 ? 'Almost There. No Rush.'
-      : p >= 40 ? 'The Water Is Rising.' : 'A Quiet Start. Every Drop Counts.';
+    $('pA').textContent = fm(Math.min(g.s, g.t)) + ' of ' + fm(g.t);
+    $('pM').textContent = p >= 100 ? 'Your lake is full. Time to go.'
+      : p >= 80 ? 'Almost there. No rush.'
+      : p >= 40 ? 'The water is rising.' : 'A quiet start. Every drop counts.';
     $('pW').style.transform = 'translateY(' + ((100 - p) * .82) + '%)';
     ea('#pSeg button', function (b) { b.setAttribute('aria-pressed', b.dataset.k === k); });
     $('pG').innerHTML = Object.keys(G).map(function (x) {
@@ -95,7 +95,7 @@
     }).join('');
     var mo = Math.max(1, Math.ceil((g.t - g.s) / g.m)), d = new Date();
     d.setMonth(d.getMonth() + mo);
-    $('pDs').textContent = 'At This Pace, ' + g.n + ' Is';
+    $('pDs').textContent = 'At this pace, ' + g.n + ' is';
     $('pD').textContent = p >= 100 ? 'Today'
       : d.toLocaleString('en-US', { month: 'long', year: 'numeric' });
   }
@@ -105,7 +105,7 @@
       return '<div class="gl bl"><span class="gi">' + ic(b[1]) + '</span><span>' + b[0] +
         '<br><small>' + b[2] + ' · ' + (b[3] ? 'Auto' : 'Manual') + '</small></span>' +
         '<button class="sw" data-i="' + i + '" aria-pressed="' + (b[3] ? 'true' : 'false') +
-        '" aria-label="Autopay For ' + b[0] + '"></button></div>';
+        '" aria-label="Auto pay for ' + b[0] + '"></button></div>';
     }).join('');
     ea('.sw', function (s) {
       s.onclick = function () { bills[s.dataset.i][3] ^= 1; RB(); };
@@ -137,7 +137,7 @@
       tot[who] += a;
       var li = document.createElement('li');
       li.className = 'gl';
-      li.innerHTML = '<span>' + who + ' Added $' + a + '</span><span style="opacity:.55">Just Now</span>';
+      li.innerHTML = '<span>' + who + ' added $' + a + '</span><span style="opacity:.55">just now</span>';
       $('pL').prepend(li);
       while ($('pL').children.length > 2) $('pL').lastChild.remove();
       R();
@@ -202,7 +202,7 @@
         if (!r.ok) throw new Error('request failed');
         return r.json();
       }).then(function () {
-        thx.textContent = 'Thank You. We’ll Write To You Softly.';
+        thx.textContent = 'Thank you. We’ll write to you softly.';
         f.reset();
       }).catch(function () {
         thx.textContent = 'Something went quiet. Please try again.';
