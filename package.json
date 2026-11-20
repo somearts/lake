@@ -1,0 +1,15 @@
+{
+  "name": "lake",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Lake — the good life is a shared life. Static site plus waitlist Worker for golake.app.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:preview": "wrangler deploy --env preview",
+    "db:init": "wrangler d1 execute lake-waitlist --file=./schema.sql --remote"
+  },
+  "devDependencies": {
+    "wrangler": "^4.151.1"
+  }
+}
